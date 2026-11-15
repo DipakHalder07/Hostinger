@@ -320,7 +320,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (aiMobileToggle) aiMobileToggle.setAttribute('aria-expanded', 'false');
     if (productPanel) productPanel.style.display = 'none';
     if (whatPanel) whatPanel.style.display = 'none';
-    if (aiMobileMenus) aiMobileMenus.style.display = 'flex';
+    if (aiMobileMenus) aiMobileMenus.style.display = window.innerWidth < 768 ? 'flex' : 'none';
     if (aiNavPanel) {
       aiNavPanel.style.display = 'none';
       aiNavPanel.classList.remove('active');
@@ -335,6 +335,7 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
       if (otherBtn) otherBtn.setAttribute('aria-expanded', 'false');
       if (otherPanel) otherPanel.style.display = 'none';
+      if (aiMobileMenus) aiMobileMenus.style.display = 'none';
 
       btn.setAttribute('aria-expanded', 'true');
       aiNavPanel.style.display = 'block';
@@ -409,14 +410,38 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  if (aiNavPanel) {
+    aiNavPanel.addEventListener('click', (e) => {
+      if (!e.target.closest('.navigation-ai-builder__dropdown') &&
+          !e.target.closest('.navigation-ai-builder__mobile-menus')) {
+        closeAiDropdowns();
+      }
+    });
+    aiNavPanel.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        closeAiDropdowns();
+      });
+    });
+  }
+
   document.addEventListener('click', (e) => {
-    if (!e.target.closest('.navigation-ai-builder')) {
+    if (!e.target.closest('.navigation-ai-builder__dropdown') &&
+        !e.target.closest('.navigation-ai-builder__trigger') &&
+        !e.target.closest('.navigation-ai-builder__mobile-toggle')) {
       closeAiDropdowns();
     }
     if (!e.target.closest('.navigation-section')) {
       closeMobileNav();
     }
     closeMegaMenu();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeAiDropdowns();
+      closeMobileNav();
+      closeMegaMenu();
+    }
   });
 
   // 9. Interactive Category Tabs & Background Images in "Your idea belongs online. Start here."
