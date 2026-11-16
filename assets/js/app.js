@@ -3,7 +3,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Clean AI Website Builder Landing Page Controller Initialized
 
-  console.log('Landing page initialized.');
 
   // 1. Activate Pricing "Choose plan" CTA buttons
   const cartUrls = {
@@ -36,7 +35,6 @@ document.addEventListener('DOMContentLoaded', () => {
     btn.setAttribute('rel', 'noopener noreferrer');
 
     btn.addEventListener('click', (e) => {
-      console.log('Selected plan:', productKey);
     });
   });
 
@@ -60,10 +58,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const getSectionTarget = (targetId) => {
     if (targetId === '#pricing' || targetId === '#sub-menu-pricing') {
-      return document.querySelector('.h-pricing-table') || document.querySelector('[data-view-id="hgr-ai_website_builder-pricing-table"]');
+      return document.querySelector('.h-pricing-table') || document.querySelector('[data-view-id="dg-ai_website_builder-pricing-table"]');
     }
     if (targetId === '#sub-menu-build-anything') {
-      return document.querySelector('[data-view-id="hgr-ai_website_builder-mixed-cards-section"]') || document.querySelector('#sub-menu-build-anything');
+      return document.querySelector('[data-view-id="dg-ai_website_builder-mixed-cards-section"]') || document.querySelector('#sub-menu-build-anything');
     }
     if (targetId === '#sub-menu-reviews') {
       return document.querySelector('.website-builder-ai-page__reviews') || document.querySelector('#sub-menu-reviews');
@@ -72,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
       return document.querySelector('.dg-picture-card-section') || document.querySelector('#sub-menu-how-it-works');
     }
     if (targetId === '#sub-menu-faq') {
-      return document.querySelector('.dg-faq-section') || document.querySelector('[data-view-id="hgr-ai_website_builder-faqs-section"]') || document.querySelector('#sub-menu-faq');
+      return document.querySelector('.dg-faq-section') || document.querySelector('[data-view-id="dg-ai_website_builder-faqs-section"]') || document.querySelector('#sub-menu-faq');
     }
     return document.querySelector(targetId);
   };
@@ -99,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   // 3. Header CTA Button ("Start building")
-  const headerCta = document.querySelector('[data-click-id="hgr-ai_website_builder-header-cta_button"]');
+  const headerCta = document.querySelector('[data-click-id="dg-ai_website_builder-header-cta_button"]');
   if (headerCta) {
     headerCta.addEventListener('click', (e) => {
       e.preventDefault();
@@ -109,11 +107,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 4. Sub-Menu Badges (Pricing, Build anything, Reviews, How it works, FAQ)
   const badgeMap = [
-    { id: 'hgr-ai_website_builder-tab_badge_select-sub-menu-pricing', target: '#pricing' },
-    { id: 'hgr-ai_website_builder-tab_badge_select-sub-menu-build-anything', target: '#sub-menu-build-anything' },
-    { id: 'hgr-ai_website_builder-tab_badge_select-sub-menu-reviews', target: '#sub-menu-reviews' },
-    { id: 'hgr-ai_website_builder-tab_badge_select-sub-menu-how-it-works', target: '#sub-menu-how-it-works' },
-    { id: 'hgr-ai_website_builder-tab_badge_select-sub-menu-faq', target: '#sub-menu-faq' }
+    { id: 'dg-ai_website_builder-tab_badge_select-sub-menu-pricing', target: '#pricing' },
+    { id: 'dg-ai_website_builder-tab_badge_select-sub-menu-build-anything', target: '#sub-menu-build-anything' },
+    { id: 'dg-ai_website_builder-tab_badge_select-sub-menu-reviews', target: '#sub-menu-reviews' },
+    { id: 'dg-ai_website_builder-tab_badge_select-sub-menu-how-it-works', target: '#sub-menu-how-it-works' },
+    { id: 'dg-ai_website_builder-tab_badge_select-sub-menu-faq', target: '#sub-menu-faq' }
   ];
 
   const badgeButtons = [];
@@ -304,17 +302,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 8. AI Builder Subnav Dropdowns ("Product", "What you can build" - Desktop & Mobile)
   const aiNavPanel = document.querySelector('.navigation-ai-builder__panel');
-  const productBtn = document.querySelector('[data-click-id="hgr-navigation-ai-builder-product"]');
-  const whatBtn = document.querySelector('[data-click-id="hgr-navigation-ai-builder-what-you-can-build"]');
+  const productBtn = document.querySelector('[data-click-id="dg-navigation-ai-builder-product"]');
+  const whatBtn = document.querySelector('[data-click-id="dg-navigation-ai-builder-what-you-can-build"]');
   const productPanel = document.getElementById('navigation-ai-builder-product');
   const whatPanel = document.getElementById('navigation-ai-builder-what-you-can-build');
   const aiBackdrop = aiNavPanel ? aiNavPanel.querySelector('.navigation-ai-builder__backdrop') : null;
 
   // Mobile specific elements
-  const aiMobileToggle = document.querySelector('[data-click-id="hgr-navigation-ai-builder-mobile-toggle"]');
+  const aiMobileToggle = document.querySelector('[data-click-id="dg-navigation-ai-builder-mobile-toggle"]');
   const aiMobileMenus = document.querySelector('.navigation-ai-builder__mobile-menus');
-  const mobileProductBtn = document.querySelector('[data-click-id="hgr-navigation-ai-builder-mobile-product"]');
-  const mobileWhatBtn = document.querySelector('[data-click-id="hgr-navigation-ai-builder-mobile-what-you-can-build"]');
+  const mobileProductBtn = document.querySelector('[data-click-id="dg-navigation-ai-builder-mobile-product"]');
+  const mobileWhatBtn = document.querySelector('[data-click-id="dg-navigation-ai-builder-mobile-what-you-can-build"]');
   const backButtons = document.querySelectorAll('.navigation-ai-builder__back');
 
   const closeAiDropdowns = () => {
@@ -448,7 +446,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // 9. Interactive Category Tabs & Background Images in "Your idea belongs online. Start here."
-  const mixedCardsSection = document.querySelector('[data-view-id="hgr-ai_website_builder-mixed-cards-section"]');
+  const mixedCardsSection = document.querySelector('[data-view-id="dg-ai_website_builder-mixed-cards-section"]');
   if (mixedCardsSection) {
     const desktopTabs = mixedCardsSection.querySelectorAll('.desktop.dg-tabs__tabs .h-tabs__tab');
     const mobileSelect = mixedCardsSection.querySelector('#dg-tabs-select-v-0-6');
@@ -469,11 +467,11 @@ document.addEventListener('DOMContentLoaded', () => {
       cards.forEach(card => {
         let bgImg = '';
         if (card.classList.contains('h-mixed-two-third-card')) {
-          bgImg = isDesktop ? './assets/images/3278136a-7cdd-4b4d-ea7f-a0c816fea300.png?v=neon3' : './assets/images/6aec9fe3-45ea-4ee2-8e89-4b9b1e118400.png?v=neon3';
+          bgImg = isDesktop ? './assets/images/bg-card-launch-desktop.png?v=neon3' : './assets/images/bg-card-launch-mobile.png?v=neon3';
         } else if (card.classList.contains('h-mixed-large-card')) {
-          bgImg = isDesktop ? './assets/images/b13d3382-4a26-4439-92d5-d420bc440800.png?v=neon3' : './assets/images/24b003d5-28b1-4554-65c2-58ad25df4100.png?v=neon3';
+          bgImg = isDesktop ? './assets/images/bg-card-deliver-desktop.png?v=neon3' : './assets/images/bg-card-deliver-mobile.png?v=neon3';
         } else if (card.classList.contains('h-mixed-one-third-card')) {
-          bgImg = isDesktop ? './assets/images/848db506-9c6f-4493-4e05-fe4987cff300.png?v=neon3' : './assets/images/9b9e5b3a-eded-42e4-692a-198643da5000.png?v=neon3';
+          bgImg = isDesktop ? './assets/images/bg-card-neon-desktop.png?v=neon3' : './assets/images/bg-card-neon-mobile.png?v=neon3';
         }
         if (bgImg) {
           card.style.setProperty('background-image', `url(${bgImg})`, 'important');
@@ -652,8 +650,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // 10. Reviews Slider Controller (Autoplay, Drag & Pagination)
   const reviewsWrapper = document.querySelector('.h-reviews__cards-wrapper');
   const reviewsContainer = document.querySelector('.h-reviews__cards');
-  const prevHandler = document.querySelector('[data-click-id="hgr-ai_website_builder-reviews-previous-click"]');
-  const nextHandler = document.querySelector('[data-click-id="hgr-ai_website_builder-reviews-next-click"]');
+  const prevHandler = document.querySelector('[data-click-id="dg-ai_website_builder-reviews-previous-click"]');
+  const nextHandler = document.querySelector('[data-click-id="dg-ai_website_builder-reviews-next-click"]');
   const reviewCards = document.querySelectorAll('.h-reviews-card');
   const reviewThumbs = document.querySelectorAll('.h-reviews__cards-scrollbar-thumb');
 
@@ -813,7 +811,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // 12. Connect other CTA buttons to #pricing
-  const startBuildingBtn = document.querySelector('[data-click-id="hgr-ai_website_builder-start_building"]');
+  const startBuildingBtn = document.querySelector('[data-click-id="dg-ai_website_builder-start_building"]');
   if (startBuildingBtn) {
     startBuildingBtn.setAttribute('href', '#pricing');
     startBuildingBtn.addEventListener('click', (e) => {
@@ -822,7 +820,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  const claimDealBtn = document.querySelector('[data-click-id="hgr-ai_website_builder-header-cta_button"]');
+  const claimDealBtn = document.querySelector('[data-click-id="dg-ai_website_builder-header-cta_button"]');
   if (claimDealBtn) {
     claimDealBtn.addEventListener('click', (e) => {
       e.preventDefault();

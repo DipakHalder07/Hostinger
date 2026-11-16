@@ -7207,8 +7207,8 @@ body {
   width: 46px;
   height: 46px;
   display: flex;
-  -webkit-mask: url(../images/fb31ac2a-b6da-4f53-420a-2a78f2a37400.png) 50%/contain no-repeat;
-  mask: url(../images/fb31ac2a-b6da-4f53-420a-2a78f2a37400.png) 50%/contain no-repeat
+  -webkit-mask: url(../images/pricing-badge-starburst.png) 50%/contain no-repeat;
+  mask: url(../images/pricing-badge-starburst.png) 50%/contain no-repeat
 }
 
 .dg-pricing-card-offer-badge--badge-first .dg-pricing-card-offer-badge__badge {
@@ -7601,7 +7601,7 @@ html {
 
 /* 6. Mixed Cards Background Images ("Your idea belongs online. Start here") */
 .h-mixed-two-third-card--bg-image-dynamic {
-  background-image: url('../images/6aec9fe3-45ea-4ee2-8e89-4b9b1e118400.png?v=neon2') !important;
+  background-image: url('../images/bg-card-launch-mobile.png?v=neon2') !important;
   background-color: #12131a !important;
   background-position: center center !important;
   background-repeat: no-repeat !important;
@@ -7610,12 +7610,12 @@ html {
 
 @media (min-width: 1025px) {
   .h-mixed-two-third-card--bg-image-dynamic {
-    background-image: url('../images/3278136a-7cdd-4b4d-ea7f-a0c816fea300.png?v=neon2') !important;
+    background-image: url('../images/bg-card-launch-desktop.png?v=neon2') !important;
   }
 }
 
 .h-mixed-one-third-card--bg-image-dynamic {
-  background-image: url('../images/9b9e5b3a-eded-42e4-692a-198643da5000.png?v=neon3') !important;
+  background-image: url('../images/bg-card-neon-mobile.png?v=neon3') !important;
   background-color: #e3ff04 !important;
   background-position: center center !important;
   background-repeat: no-repeat !important;
@@ -7624,12 +7624,12 @@ html {
 
 @media (min-width: 1025px) {
   .h-mixed-one-third-card--bg-image-dynamic {
-    background-image: url('../images/848db506-9c6f-4493-4e05-fe4987cff300.png?v=neon3') !important;
+    background-image: url('../images/bg-card-neon-desktop.png?v=neon3') !important;
   }
 }
 
 .h-mixed-large-card--bg-image-dynamic {
-  background-image: url('../images/24b003d5-28b1-4554-65c2-58ad25df4100.png?v=neon2') !important;
+  background-image: url('../images/bg-card-deliver-mobile.png?v=neon2') !important;
   background-color: #12131a !important;
   background-position: center center !important;
   background-repeat: no-repeat !important;
@@ -7638,7 +7638,7 @@ html {
 
 @media (min-width: 1025px) {
   .h-mixed-large-card--bg-image-dynamic {
-    background-image: url('../images/b13d3382-4a26-4439-92d5-d420bc440800.png?v=neon2') !important;
+    background-image: url('../images/bg-card-deliver-desktop.png?v=neon2') !important;
   }
 }
 
@@ -68866,8 +68866,8 @@ div.list-loader div.list-loader__item {
   width: 46px;
   height: 46px;
   display: flex;
-  -webkit-mask: url(../images/fb31ac2a-b6da-4f53-420a-2a78f2a37400.png) 50%/contain no-repeat;
-  mask: url(../images/fb31ac2a-b6da-4f53-420a-2a78f2a37400.png) 50%/contain no-repeat
+  -webkit-mask: url(../images/pricing-badge-starburst.png) 50%/contain no-repeat;
+  mask: url(../images/pricing-badge-starburst.png) 50%/contain no-repeat
 }
 
 .dg-pricing-card-offer-badge--badge-first .dg-pricing-card-offer-badge__badge {
@@ -72708,7 +72708,7 @@ div.list-loader div.list-loader__item {
 
 
 /* ========================================================================== */
-/* REVIEWS SECTION (1:1 LIVE HOSTINGER DESIGN) */
+/* REVIEWS SECTION (1:1 LIVE DIGITAL GROVE DESIGN) */
 /* ========================================================================== */
 
 /* 1. Spacing & Clearance for sticky navigation */
@@ -72800,7 +72800,7 @@ div.list-loader div.list-loader__item {
   right: 0 !important;
 }
 
-/* 5. Review Card Design matching live Hostinger */
+/* 5. Review Card Design matching live Digital Grove */
 .h-reviews-card {
   color: var(--h-fg-neutral-default) !important;
   background-color: var(--h-color-neutral-0, #ffffff) !important;
@@ -73499,7 +73499,7 @@ input[type="radio"]:checked,
   cursor: pointer !important;
   position: relative !important;
   width: 100% !important;
-  aspect-ratio: 1365 / 1369 !important; /* EXACT 1:1 SQUARE ASPECT RATIO FROM HOSTINGER LIVE! */
+  aspect-ratio: 1365 / 1369 !important; /* EXACT 1:1 SQUARE ASPECT RATIO FROM DIGITAL GROVE LIVE! */
   border-radius: 12px !important;
   overflow: hidden !important;
   background-color: #16171b !important;

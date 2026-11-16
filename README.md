@@ -62,4 +62,4 @@ python3 -m http.server 3000 --bind 127.0.0.1
 
 ### Direct File
 Open [index.html](file:///Users/apple/Downloads/LP1/index.html) directly in any modern browser.
-# Hostinger
+# Digital Grove
