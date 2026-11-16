@@ -178,18 +178,21 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // 6. Interactive FAQ Accordion
-  const accordions = document.querySelectorAll('.dg-accordion');
+  const accordions = document.querySelectorAll('.dg-faq-section .dg-accordion');
   accordions.forEach(acc => {
     const header = acc.querySelector('.dg-accordion__header');
     if (header) {
       header.addEventListener('click', () => {
         const isOpen = acc.classList.contains('dg-accordion--open');
+        const panel = acc.querySelector('.dg-accordion__panel');
         if (isOpen) {
           acc.classList.remove('dg-accordion--open');
           header.setAttribute('aria-expanded', 'false');
+          if (panel) panel.setAttribute('inert', '');
         } else {
           acc.classList.add('dg-accordion--open');
           header.setAttribute('aria-expanded', 'true');
+          if (panel) panel.removeAttribute('inert');
         }
       });
       header.addEventListener('keydown', (e) => {
@@ -466,11 +469,11 @@ document.addEventListener('DOMContentLoaded', () => {
       cards.forEach(card => {
         let bgImg = '';
         if (card.classList.contains('h-mixed-two-third-card')) {
-          bgImg = isDesktop ? './assets/images/3278136a-7cdd-4b4d-ea7f-a0c816fea300.png' : './assets/images/6aec9fe3-45ea-4ee2-8e89-4b9b1e118400.png';
+          bgImg = isDesktop ? './assets/images/3278136a-7cdd-4b4d-ea7f-a0c816fea300.png?v=neon3' : './assets/images/6aec9fe3-45ea-4ee2-8e89-4b9b1e118400.png?v=neon3';
         } else if (card.classList.contains('h-mixed-large-card')) {
-          bgImg = isDesktop ? './assets/images/b13d3382-4a26-4439-92d5-d420bc440800.png' : './assets/images/24b003d5-28b1-4554-65c2-58ad25df4100.png';
+          bgImg = isDesktop ? './assets/images/b13d3382-4a26-4439-92d5-d420bc440800.png?v=neon3' : './assets/images/24b003d5-28b1-4554-65c2-58ad25df4100.png?v=neon3';
         } else if (card.classList.contains('h-mixed-one-third-card')) {
-          bgImg = isDesktop ? './assets/images/848db506-9c6f-4493-4e05-fe4987cff300.png' : './assets/images/9b9e5b3a-eded-42e4-692a-198643da5000.png';
+          bgImg = isDesktop ? './assets/images/848db506-9c6f-4493-4e05-fe4987cff300.png?v=neon3' : './assets/images/9b9e5b3a-eded-42e4-692a-198643da5000.png?v=neon3';
         }
         if (bgImg) {
           card.style.setProperty('background-image', `url(${bgImg})`, 'important');
@@ -509,9 +512,97 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       });
 
-      // 4. Update background images
+      // 4. Update mobile carousel cards
+      const carouselCards = mixedCardsSection.querySelectorAll('.dg-mixed-cards__carousel .dg-carousel__card');
+      if (carouselCards.length === 4 && cardGroups[index] && cardGroups[index].length === 4) {
+        cardGroups[index].forEach((wrapper, cardIdx) => {
+          const mobileCardContainer = carouselCards[cardIdx].querySelector('.dg-mixed-cards__card-mobile');
+          if (mobileCardContainer && wrapper.firstElementChild) {
+            mobileCardContainer.innerHTML = wrapper.firstElementChild.outerHTML;
+          }
+        });
+        if (carouselCards[0]) {
+          carouselCards[0].scrollIntoView({ behavior: 'auto', inline: 'center', block: 'nearest' });
+        }
+        const dots = mixedCardsSection.querySelectorAll('.dg-mixed-cards__carousel .dg-carousel-dots__dot');
+        dots.forEach((d, i) => {
+          if (i === 0) {
+            d.classList.add('dg-carousel-dots__dot--active');
+            d.setAttribute('aria-selected', 'true');
+          } else {
+            d.classList.remove('dg-carousel-dots__dot--active');
+            d.setAttribute('aria-selected', 'false');
+          }
+        });
+      }
+
+      // 5. Update background images
       updateMixedCardBackgrounds();
+
+      // 6. Equalize card heights
+      equalizeMixedCardHeights();
     };
+
+    const equalizeMixedCardHeights = () => {
+      if (window.innerWidth >= 1025) return;
+      const carouselCards = mixedCardsSection.querySelectorAll('.dg-mixed-cards__carousel .dg-carousel__card');
+      const innerCards = mixedCardsSection.querySelectorAll('.dg-mixed-cards__carousel .h-mixed-two-third-card, .dg-mixed-cards__carousel .h-mixed-one-third-card, .dg-mixed-cards__carousel .h-mixed-large-card');
+      if (!carouselCards.length || !innerCards.length) return;
+      
+      innerCards.forEach(c => { c.style.height = ''; c.style.minHeight = ''; });
+      carouselCards.forEach(c => { c.style.height = ''; });
+
+      let maxHeight = 0;
+      innerCards.forEach(c => {
+        const h = c.offsetHeight;
+        if (h > maxHeight) maxHeight = h;
+      });
+      if (maxHeight < 520) maxHeight = 520;
+
+      carouselCards.forEach(c => {
+        c.style.setProperty('height', `${maxHeight}px`, 'important');
+      });
+      innerCards.forEach(c => {
+        c.style.setProperty('height', `${maxHeight}px`, 'important');
+        c.style.setProperty('min-height', `${maxHeight}px`, 'important');
+      });
+    };
+
+    // Mobile carousel dots and scroll synchronization
+    const carouselOverflow = mixedCardsSection.querySelector('.dg-mixed-cards__carousel .dg-carousel__overflow-container');
+    const carouselDots = mixedCardsSection.querySelectorAll('.dg-mixed-cards__carousel .dg-carousel-dots__dot');
+    const carouselCardsList = mixedCardsSection.querySelectorAll('.dg-mixed-cards__carousel .dg-carousel__card');
+
+    if (carouselOverflow && carouselDots.length && carouselCardsList.length) {
+      const updateActiveDot = (activeIdx) => {
+        carouselDots.forEach((d, i) => {
+          if (i === activeIdx) {
+            d.classList.add('dg-carousel-dots__dot--active');
+            d.setAttribute('aria-selected', 'true');
+          } else {
+            d.classList.remove('dg-carousel-dots__dot--active');
+            d.setAttribute('aria-selected', 'false');
+          }
+        });
+      };
+
+      carouselDots.forEach((dot, idx) => {
+        dot.addEventListener('click', () => {
+          const targetCard = carouselCardsList[idx];
+          if (targetCard) {
+            targetCard.scrollIntoView({ behavior: 'auto', inline: 'center', block: 'nearest' });
+            updateActiveDot(idx);
+          }
+        });
+      });
+
+      carouselOverflow.addEventListener('scroll', () => {
+        const scrollLeft = carouselOverflow.scrollLeft;
+        const cardWidth = carouselCardsList[0].offsetWidth + 16;
+        const activeIdx = Math.min(carouselCardsList.length - 1, Math.max(0, Math.round(scrollLeft / cardWidth)));
+        updateActiveDot(activeIdx);
+      }, { passive: true });
+    }
 
     // Attach click listeners to desktop tabs
     desktopTabs.forEach((tab, index) => {
@@ -548,9 +639,14 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
 
-    // Initialize backgrounds and resize listener
+    // Initialize backgrounds, height equalization, and resize listener
     updateMixedCardBackgrounds();
-    window.addEventListener('resize', updateMixedCardBackgrounds, { passive: true });
+    equalizeMixedCardHeights();
+    window.addEventListener('resize', () => {
+      updateMixedCardBackgrounds();
+      equalizeMixedCardHeights();
+    }, { passive: true });
+    window.addEventListener('load', equalizeMixedCardHeights);
   }
 
   // 10. Reviews Slider Controller (Autoplay, Drag & Pagination)
@@ -768,4 +864,141 @@ document.addEventListener('DOMContentLoaded', () => {
 
   window.addEventListener('scroll', updateStickyHeaders, { passive: true });
   updateStickyHeaders();
+
+  // 14. Pick a template. Make it yours. Section Controller
+  const templateTabs = document.querySelectorAll('.dg-templates-header__category-tab');
+  const templateCards = document.querySelectorAll('.h-horizons-templates-card');
+
+  if (templateTabs.length > 0 && templateCards.length > 0) {
+    // Category Tabs Filtering
+    templateTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        templateTabs.forEach(t => {
+          t.classList.remove('active');
+          t.setAttribute('aria-pressed', 'false');
+        });
+        tab.classList.add('active');
+        tab.setAttribute('aria-pressed', 'true');
+
+        const category = tab.getAttribute('data-category');
+        templateCards.forEach(card => {
+          const cardCat = card.getAttribute('data-category');
+          if (category === 'all' || category === 'more' || !cardCat || cardCat === category) {
+            card.classList.remove('hidden');
+            card.style.opacity = '1';
+            card.style.transform = 'scale(1)';
+          } else {
+            card.classList.add('hidden');
+          }
+        });
+      });
+    });
+
+    // Preview click scrolls to pricing
+    document.querySelectorAll('.h-horizons-templates-card__media-container, .h-horizons-templates-card__media-overlay-button').forEach(el => {
+      el.addEventListener('click', (e) => {
+        e.preventDefault();
+        smoothScrollTo('#pricing');
+      });
+    });
+  }
+
+  // 15. Mobile Footer Accordion Toggles
+  document.querySelectorAll('.dg-footer .dg-accordion__header, .h-footer .dg-accordion__header').forEach(header => {
+    const toggleFooterAccordion = (e) => {
+      if (window.innerWidth < 768) {
+        e.preventDefault();
+        const isExpanded = header.getAttribute('aria-expanded') === 'true';
+        header.setAttribute('aria-expanded', !isExpanded);
+        const panel = header.nextElementSibling;
+        if (panel) {
+          panel.classList.toggle('is-open', !isExpanded);
+        }
+      }
+    };
+    header.addEventListener('click', toggleFooterAccordion);
+    header.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        toggleFooterAccordion(e);
+      }
+    });
+  });
+
+  // 16. "No experience? No problem." Picture Cards Carousel Controller
+  const pictureCardSection = document.querySelector('.dg-picture-card-section');
+  if (pictureCardSection) {
+    const pcCarousel = pictureCardSection.querySelector('.dg-picture-card-section__carousel');
+    const pcOverflow = pcCarousel ? pcCarousel.querySelector('.dg-carousel__overflow-container') : null;
+    const pcDots = pcCarousel ? pcCarousel.querySelectorAll('.dg-carousel-dots__dot') : [];
+    const pcCards = pcCarousel ? pcCarousel.querySelectorAll('.dg-carousel__card') : [];
+
+    const updatePcActiveDot = (activeIdx) => {
+      pcDots.forEach((d, i) => {
+        if (i === activeIdx) {
+          d.classList.add('dg-carousel-dots__dot--active');
+          d.setAttribute('aria-selected', 'true');
+        } else {
+          d.classList.remove('dg-carousel-dots__dot--active');
+          d.setAttribute('aria-selected', 'false');
+        }
+      });
+    };
+
+    if (pcOverflow && pcDots.length && pcCards.length) {
+      pcDots.forEach((dot, idx) => {
+        dot.addEventListener('click', () => {
+          const target = pcCards[idx];
+          if (target) {
+            target.scrollIntoView({ behavior: 'auto', inline: 'center', block: 'nearest' });
+            updatePcActiveDot(idx);
+          }
+        });
+      });
+
+      pcOverflow.addEventListener('scroll', () => {
+        const scrollLeft = pcOverflow.scrollLeft;
+        const cardWidth = pcCards[0].offsetWidth + 16;
+        const activeIdx = Math.min(pcCards.length - 1, Math.max(0, Math.round(scrollLeft / cardWidth)));
+        updatePcActiveDot(activeIdx);
+      }, { passive: true });
+    }
+
+    const equalizePictureCardHeights = () => {
+      if (window.innerWidth >= 1025) {
+        pcCards.forEach(c => {
+          c.style.height = '';
+          const card = c.querySelector('.dg-picture-card');
+          if (card) {
+            card.style.height = '';
+            card.style.minHeight = '';
+          }
+        });
+        return;
+      }
+      let maxHeight = 0;
+      pcCards.forEach(c => {
+        c.style.height = '';
+        const card = c.querySelector('.dg-picture-card');
+        if (card) {
+          card.style.height = '';
+          card.style.minHeight = '';
+          const h = card.offsetHeight;
+          if (h > maxHeight) maxHeight = h;
+        }
+      });
+      if (maxHeight < 388) maxHeight = 388;
+      pcCards.forEach(c => {
+        c.style.setProperty('height', `${maxHeight}px`, 'important');
+        const card = c.querySelector('.dg-picture-card');
+        if (card) {
+          card.style.setProperty('height', `${maxHeight}px`, 'important');
+          card.style.setProperty('min-height', `${maxHeight}px`, 'important');
+        }
+      });
+    };
+
+    window.addEventListener('load', equalizePictureCardHeights);
+    window.addEventListener('resize', equalizePictureCardHeights, { passive: true });
+    equalizePictureCardHeights();
+  }
 });
