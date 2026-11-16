@@ -95,14 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.scrollTo({ top: targetY, behavior: 'smooth' });
   };
 
-  // 3. Header CTA Button ("Start building")
-  const headerCta = document.querySelector('[data-click-id="dg-ai_website_builder-header-cta_button"]');
-  if (headerCta) {
-    headerCta.addEventListener('click', (e) => {
-      e.preventDefault();
-      smoothScrollTo('#pricing');
-    });
-  }
+  // 3. Hero "Get free quote" button scrolls to the quote form (handled by the #get-quote handler below)
 
   // 4. Sub-Menu Badges (Pricing, Build anything, Reviews, How it works, FAQ)
   const badgeMap = [
@@ -608,36 +601,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Start autoplay
   startReviewAutoplay();
-
-  // 11. Ensure Video Plays
-  const video = document.querySelector('video');
-  if (video) {
-    video.muted = true;
-    const playPromise = video.play();
-    if (playPromise !== undefined) {
-      playPromise.catch(() => {
-        // Autoplay policy prevented playback, keep poster visible
-      });
-    }
-  }
-
-  // 12. Connect other CTA buttons to #pricing
-  const startBuildingBtn = document.querySelector('[data-click-id="dg-ai_website_builder-start_building"]');
-  if (startBuildingBtn) {
-    startBuildingBtn.setAttribute('href', '#pricing');
-    startBuildingBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      smoothScrollTo('#pricing');
-    });
-  }
-
-  const claimDealBtn = document.querySelector('[data-click-id="dg-ai_website_builder-header-cta_button"]');
-  if (claimDealBtn) {
-    claimDealBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      smoothScrollTo('#pricing');
-    });
-  }
 
   // All href='#get-quote' clicks (lead form)
   document.querySelectorAll('a[href="#get-quote"]').forEach(a => {

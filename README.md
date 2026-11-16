@@ -5,16 +5,19 @@ This is the original Digital Grove landing-page template (same design, layout an
 ```text
 LP1/
 ├── index.html                 # Landing page (template design + Siliguri web design content, SEO meta, JSON-LD)
-├── thank-you.html             # Post-submit page (noindex). Put your Google Ads conversion tag here
+├── thank-you.html             # Post-submit page (noindex); GTM + Ads tag, no duplicate conversion
 ├── privacy-policy.html        # Privacy policy (linked in the footer and under the form). Review before going live
-├── assets/css/style.css       # Original template stylesheet (unchanged)
-├── assets/css/lead.css        # Small add-on: quote form, WhatsApp buttons, client names, review initials
-├── assets/css/thank-you.css   # Styles for thank-you.html only
-├── assets/js/app.js           # Original template controller (tabs, reviews, FAQ, menus), CTAs now go to the form
-├── assets/js/lead.js          # Quote form → HubSpot, WhatsApp links, UTM/gclid capture, dataLayer events
-├── assets/images/             # Template images + assets/images/portfolio (real client screenshots)
+├── favicon.ico
+├── assets/css/style.css       # Original template stylesheet
+├── assets/css/lead.css        # Add-ons: quote form, WhatsApp buttons, logo slider, portfolio spacing
+├── assets/css/thank-you.css   # Styles for thank-you.html and privacy-policy.html only
+├── assets/js/app.js           # Template controller (tabs, reviews, FAQ, menus); CTAs go to the quote form
+├── assets/js/lead.js          # Quote form → HubSpot, Google Ads conversion, WhatsApp links, UTM/gclid capture
+├── assets/images/             # Only images the pages use (WebP), plus clients/ (logos) and portfolio/ (screenshots)
 └── docs/keyword-research-and-ads-plan.md   # Keywords, ad groups, negatives, ad copy, tracking
 ```
+
+Every file in the project is used by a page. Unused template images, old versions and local tool files were removed (they remain in git history). `.gitignore` keeps `.DS_Store` and local tool folders out of the repo.
 
 ## Page sections (in the template's order)
 
@@ -38,7 +41,9 @@ LP1/
 
 ## Preview locally
 
+Use VS Code Live Server (http://localhost:5500/), or:
+
 ```bash
-python3 -m http.server 3000 --bind 127.0.0.1
+python3 -m http.server 8080 --bind 127.0.0.1
 ```
-Then open http://127.0.0.1:3000/
+Then open http://127.0.0.1:8080/
