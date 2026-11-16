@@ -7,16 +7,16 @@
   'use strict';
 
   /* ---------------------------------------------------------------------
-     CONFIG: edit these values
-     hubspotFormGuid: create a form in HubSpot (Marketing → Forms) with the
-     fields firstname, phone, message, then copy its Form ID (GUID) here.
-     Until it is set, leads go to the thank-you page and WhatsApp only.
+     CONFIG
+     HubSpot form = the same form your old ads page used (only "phone" is required).
+     Google Ads conversion = the same "lead form fill" conversion as the old page.
      --------------------------------------------------------------------- */
   var CONFIG = {
     whatsappNumber: '918617513004',
     hubspotPortalId: '245081602',
-    hubspotFormGuid: '', // e.g. 'a1b2c3d4-....' (REQUIRED for HubSpot leads)
-    hubspotRegion: '', // leave empty to use the global api.hsforms.com endpoint (set 'eu1' only for EU-hosted portals)
+    hubspotFormGuid: 'bbaca643-e741-42f8-aa5a-4b03e7d94778',
+    hubspotRegion: '', // empty = global api.hsforms.com endpoint
+    adsConversionSendTo: 'AW-17957925667/Bk7pCPKB6cocEKPmgPNC',
     thankYouUrl: 'thank-you.html',
     defaultWaText: 'Hi Digital Grove, I want a website for my business in Siliguri. Please share details.'
   };
@@ -144,9 +144,18 @@
 
       function done() {
         track('generate_lead', { form_id: formId, business_type: type.value, need: need || '(none)', plan: plan || '(none)' });
+        // Same event name as the old ads page, so existing GTM triggers keep working
+        track('form_submit_success', { form_name: 'contact_hubspot', form_id: formId });
         store('dg_lead', JSON.stringify(lead));
-        // Small delay lets tags fire before navigation
-        setTimeout(function () { window.location.href = CONFIG.thankYouUrl; }, 300);
+        var went = false;
+        function go() { if (!went) { went = true; window.location.href = CONFIG.thankYouUrl; } }
+        // Google Ads conversion (lead form fill); redirect once it is sent, or after 1.2s at most
+        if (typeof window.gtag === 'function' && CONFIG.adsConversionSendTo) {
+          window.gtag('event', 'conversion', { send_to: CONFIG.adsConversionSendTo, event_callback: go });
+          setTimeout(go, 1200);
+        } else {
+          setTimeout(go, 300);
+        }
       }
       function fail() {
         btn.removeAttribute('aria-busy'); btnLabel.innerHTML = btnHtml;
@@ -157,22 +166,35 @@
       if (!CONFIG.hubspotFormGuid) { done(); return; }
 
       var host = CONFIG.hubspotRegion ? 'https://api-' + CONFIG.hubspotRegion + '.hsforms.com' : 'https://api.hsforms.com';
-      var body = {
-        fields: [
-          { objectTypeId: '0-1', name: 'firstname', value: lead.name },
-          { objectTypeId: '0-1', name: 'phone', value: lead.phone },
-          { objectTypeId: '0-1', name: 'message', value: message }
-        ],
-        context: { pageUri: window.location.href, pageName: document.title }
-      };
+      var parts = lead.name.split(/\s+/);
+      var coreFields = [
+        { name: 'firstname', value: parts[0] },
+        { name: 'phone', value: lead.phone },
+        { name: 'message', value: message }
+      ];
+      if (parts.length > 1) coreFields.splice(1, 0, { name: 'lastname', value: parts.slice(1).join(' ') });
+      // UTM / click-id fields, sent the same way as the old ads page
+      var attrFields = Object.keys(attr).map(function (k) { return { name: k, value: attr[k] }; });
+      var context = { pageUri: window.location.href, pageName: document.title };
       var hutk = getCookie('hubspotutk');
-      if (hutk) body.context.hutk = hutk;
+      if (hutk) context.hutk = hutk;
+      var url = host + '/submissions/v3/integration/submit/' + CONFIG.hubspotPortalId + '/' + CONFIG.hubspotFormGuid;
 
-      fetch(host + '/submissions/v3/integration/submit/' + CONFIG.hubspotPortalId + '/' + CONFIG.hubspotFormGuid, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body)
-      }).then(function (r) { if (r.ok) done(); else fail(); }).catch(fail);
+      function send(fields) {
+        return fetch(url, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ fields: fields, context: context })
+        });
+      }
+      send(coreFields.concat(attrFields)).then(function (r) {
+        if (r.ok) return done();
+        // If HubSpot rejects the extra tracking fields, retry with the core fields only
+        if (attrFields.length) {
+          return send(coreFields).then(function (r2) { if (r2.ok) done(); else fail(); });
+        }
+        fail();
+      }).catch(fail);
     });
   });
 

@@ -30,9 +30,9 @@ LP1/
 
 ## Before running ads
 
-1. **Prices:** check ₹9,999 / ₹19,999 / ₹34,999 (pricing cards, FAQ, JSON-LD `OfferCatalog`, hero).
-2. **HubSpot form ID:** set `hubspotFormGuid` in `assets/js/lead.js`. Until you do, **form leads are not saved**: visitors only get the thank-you page and a WhatsApp button.
-3. **Tracking:** add GTM (both pages) or the Google Ads conversion snippet in `thank-you.html`, and create a conversion for the `generate_lead` event.
+1. **Prices:** ₹9,999 / ₹19,999 / ₹34,999 confirmed (pricing cards, FAQ, JSON-LD `OfferCatalog`, hero).
+2. **HubSpot form:** ✅ connected to portal `245081602`, form `bbaca643-e741-42f8-aa5a-4b03e7d94778` (same form as the old ads page; only `phone` is required). Sends firstname/lastname, phone, message and UTM/gclid fields.
+3. **Tracking:** ✅ Google Ads tag `AW-17957925667` + GTM `GTM-MBS7FWKB` on the landing and thank-you pages. A successful form submit fires the Ads conversion `AW-17957925667/Bk7pCPKB6cocEKPmgPNC` and pushes `generate_lead` + `form_submit_success` (same event as the old page) to the dataLayer, then redirects to `thank-you.html` (which does not fire it again).
 4. **URL:** publish at `https://digitalgrove.in/website-design-siliguri`, or update the canonical and OG URLs.
 5. **Privacy policy:** review `privacy-policy.html` and publish it at `digitalgrove.in/privacy-policy` (update the two links if you use a different URL).
 
