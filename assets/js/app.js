@@ -1,4 +1,4 @@
-// AI Website Builder Landing Page Interactive Controller
+// Digital Grove – Website Design in Siliguri landing page controller (template interactions)
 document.addEventListener('DOMContentLoaded', () => {
 
   // Clean AI Website Builder Landing Page Controller Initialized
@@ -6,9 +6,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 1. Activate Pricing "Choose plan" CTA buttons
   const cartUrls = {
-    'hosting:premium_plan': '#pricing',
-    'hosting:unlimited': '#pricing',
-    'hosting:cloud_economy': '#pricing'
+    'hosting:premium_plan': '#get-quote',
+    'hosting:unlimited': '#get-quote',
+    'hosting:cloud_economy': '#get-quote'
   };
 
   const pricingButtons = document.querySelectorAll('.h-pricing-card__add-to-cart');
@@ -30,9 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
     else if (qa.includes('cloud_economy')) productKey = 'hosting:cloud_economy';
     else if (qa.includes('unlimited')) productKey = 'hosting:unlimited';
 
-    btn.setAttribute('href', cartUrls[productKey] || '#pricing');
-    btn.setAttribute('target', '_blank');
-    btn.setAttribute('rel', 'noopener noreferrer');
+    btn.setAttribute('href', '#get-quote');
 
     btn.addEventListener('click', (e) => {
     });
@@ -638,6 +636,18 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // All href='#get-quote' clicks (lead form)
+  document.querySelectorAll('a[href="#get-quote"]').forEach(a => {
+    a.addEventListener('click', (e) => {
+      e.preventDefault();
+      const form = document.getElementById('get-quote');
+      if (!form) return;
+      const y = form.getBoundingClientRect().top + window.pageYOffset - getHeaderHeight() - 16;
+      window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+      setTimeout(() => { const f = document.getElementById('lead-name'); if (f) f.focus({ preventScroll: true }); }, 700);
+    });
+  });
+
   // All href='#pricing' clicks
   document.querySelectorAll('a[href="#pricing"]').forEach(a => {
     a.addEventListener('click', (e) => {
@@ -692,11 +702,12 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
 
-    // Preview click scrolls to pricing
-    document.querySelectorAll('.h-horizons-templates-card__media-container, .h-horizons-templates-card__media-overlay-button').forEach(el => {
+    // Portfolio cards: clicking the screenshot opens the live website
+    document.querySelectorAll('.h-horizons-templates-card__media-container').forEach(el => {
       el.addEventListener('click', (e) => {
-        e.preventDefault();
-        smoothScrollTo('#pricing');
+        if (e.target.closest('a')) return;
+        const link = el.querySelector('a.dg-live-link');
+        if (link) window.open(link.href, '_blank', 'noopener');
       });
     });
   }

@@ -1,65 +1,42 @@
-# AI Website Builder Landing Page (Production-Ready Replica)
+# Digital Grove: Website Design in Siliguri (Ads Landing Page)
 
-Clean, standalone, production-ready landing page built with standard **HTML5**, **CSS3**, **Vanilla JS / jQuery**, and **Bootstrap 5 CDN**.
-
----
-
-## Clean Project Structure
+This is the original Digital Grove landing-page template (same design, layout and classes), with its content rewritten to sell **website design services in Siliguri** and set up for Google/Meta ads, SEO and lead capture.
 
 ```text
 LP1/
-├── index.html                  # Main production HTML5 landing page
-├── favicon.ico                 # Favicon
-├── README.md                   # Documentation
-└── assets/
-    ├── css/
-    │   └── style.css           # Modular, unbranded stylesheet (dg- class prefix)
-    ├── js/
-    │   └── app.js              # Interactive controller (Tabs, Badges, FAQ, Scroll)
-    ├── media/
-    │   ├── video.mp4           # 3D Hero video animation
-    │   └── thumbnail.jpg       # Video poster preview
-    └── images/                 # All 79 local web assets (PNGs, icons, illustrations)
+├── index.html                 # Landing page (template design + Siliguri web design content, SEO meta, JSON-LD)
+├── thank-you.html             # Post-submit page (noindex). Put your Google Ads conversion tag here
+├── assets/css/style.css       # Original template stylesheet (unchanged)
+├── assets/css/lead.css        # Small add-on: quote form, WhatsApp buttons, client names, review initials
+├── assets/css/thank-you.css   # Styles for thank-you.html only
+├── assets/js/app.js           # Original template controller (tabs, reviews, FAQ, menus), CTAs now go to the form
+├── assets/js/lead.js          # Quote form → HubSpot, WhatsApp links, UTM/gclid capture, dataLayer events
+├── assets/images/             # Template images + assets/images/portfolio (real client screenshots)
+└── docs/keyword-research-and-ads-plan.md   # Keywords, ad groups, negatives, ad copy, tracking
 ```
 
----
+## Page sections (in the template's order)
 
-## Features & Highlights
+1. **Top ticker:** free consultation, 150+ businesses served, Siliguri
+2. **Hero:** "Website Design in Siliguri that brings you more customers", websites from ₹9,999, Get free quote + WhatsApp
+3. **Client logo slider:** Trinity Hotel, SGMG, TeaAru, Status Bath & Kitchen, Shree Shyam Sweets, The Tea Cartel, Nidhi Tea, Shaadi Shenanigans, SBM Gold (white logos in `assets/images/clients/`)
+4. **Pricing:** Starter ₹9,999 · Business ₹19,999 · Ecommerce ₹34,999 (one-time, starting prices)
+5. **Services tabs:** Ecommerce, Business, Schools & coaching, Professionals, Hotels & bookings, Custom web apps, Redesign
+6. **Reviews:** 4 real client reviews from digitalgrove.in
+7. **Our work:** 9 live client websites (incl. Status Bath & Kitchen and SGMG)
+8. **3 steps:** consultation → design & build → launch & grow
+9. **Why us:** stats · 10. **FAQs:** 8 local FAQs · 11. **Quote form** (`#get-quote`) · 12. WhatsApp CTA · 13. Footer
 
-- **Standard Tech Stack**: Standard HTML5, CSS3, Vanilla JS, Bootstrap 5 (CDN), and jQuery (CDN). No heavy framework or node dependencies required.
-- **Clean Prefix & Unbranded**: All classes, CSS variables, and components use the clean `dg-` prefix. Zero third-party branding or tracking scripts.
-- **Top Sticky Stack**:
-  - Continuous marquee announcement banner (`.dg-top-banner`).
-  - Main header navigation (`.navigation-section`).
-  - Secondary product sub-navbar (`.navigation-ai-builder`) with "Product" & "What you can build" dropdowns.
-  - Floating pill switcher (`.dg-sub-menu__badges`) with offset-aware smooth scrolling and active ScrollSpy.
-- **"Your idea belongs online. Start here." Section**:
-  - Responsive dynamic mesh/gradient background cards.
-  - Fully interactive category tab switcher across all 7 business types (Online store, Business website, Memberships, Portfolio, Bookings, Interactive sites, Websites from URL).
-  - Mobile select dropdown with synchronization.
-- **Complete Interactive Sections**:
-  - Hero section featuring Before/After website transformation animated showcase (`assets/images/hero-before-after.gif`).
-  - 3-tier pricing table (`#pricing`) with bonus feature tags.
-  - Full feature comparison table.
-  - Interactive customer reviews carousel with smooth horizontal scroll navigation.
-  - "No experience? No problem." 3-step carousel guide.
-  - Performance metrics and statistics stack.
-  - 14-question FAQ accordion with smooth CSS grid expanding/collapsing animations.
-  - Clean footer with payment method badges and social links.
+## Before running ads
 
----
+1. **Prices:** check ₹9,999 / ₹19,999 / ₹34,999 (pricing cards, FAQ, JSON-LD `OfferCatalog`, hero).
+2. **HubSpot form ID:** set `hubspotFormGuid` in `assets/js/lead.js`. Until you do, **form leads are not saved**: visitors only get the thank-you page and a WhatsApp button.
+3. **Tracking:** add GTM (both pages) or the Google Ads conversion snippet in `thank-you.html`, and create a conversion for the `generate_lead` event.
+4. **URL:** publish at `https://digitalgrove.in/website-design-siliguri`, or update the canonical and OG URLs.
 
-## How to View
+## Preview locally
 
-### Local Static Server
-Open in any browser:
-[http://127.0.0.1:3000/](http://127.0.0.1:3000/)
-
-Or run:
 ```bash
 python3 -m http.server 3000 --bind 127.0.0.1
 ```
-
-### Direct File
-Open [index.html](file:///Users/apple/Downloads/LP1/index.html) directly in any modern browser.
-# Digital Grove
+Then open http://127.0.0.1:3000/
