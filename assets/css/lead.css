@@ -135,3 +135,29 @@
 @media (max-width: 1024px) {
   .dg-lead__form { order: -1; }
 }
+.dg-lead__form .form-consent { margin: 8px 0 0; color: #9d9ea4; text-align: center; }
+.dg-lead__form .form-consent a { color: #f8f9fa; text-decoration: underline; text-underline-offset: 2px; }
+
+/* First section after the hero ("Our work"): the wrapper already adds top spacing, so don't double it */
+.dg-sub-menu > section:first-child { padding-top: 0 !important; }
+
+/* Our work: same side gutters as the other template sections (16 / 40 / 80px) */
+.dg-horizons-templates-section__content { padding-left: 16px !important; padding-right: 16px !important; }
+@media (min-width: 768px) { .dg-horizons-templates-section__content { padding-left: 40px !important; padding-right: 40px !important; } }
+@media (min-width: 1025px) { .dg-horizons-templates-section__content { max-width: 1440px !important; padding-left: 80px !important; padding-right: 80px !important; } }
+
+/* Floating "Chat Now" WhatsApp button (bottom-left) */
+.whatsapp-btn {
+  position: fixed;
+  bottom: 12px;
+  left: 13px;
+  border-radius: 4px;
+  padding: 4px 13px;
+  z-index: 9999999;
+  font-weight: 600;
+  background-color: #25D366 !important;
+  border: 2px solid #25D366 !important;
+  color: #fff !important;
+  text-decoration: none;
+}
+.whatsapp-btn:hover { color: #fff !important; }

@@ -65,6 +65,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (targetId === '#sub-menu-how-it-works') {
       return document.querySelector('.dg-picture-card-section') || document.querySelector('#sub-menu-how-it-works');
     }
+    if (targetId === '#our-work') {
+      return document.querySelector('.dg-horizons-templates-section') || document.querySelector('#our-work');
+    }
     if (targetId === '#sub-menu-faq') {
       return document.querySelector('.dg-faq-section') || document.querySelector('[data-view-id="dg-ai_website_builder-faqs-section"]') || document.querySelector('#sub-menu-faq');
     }
@@ -275,9 +278,9 @@ document.addEventListener('DOMContentLoaded', () => {
       cards.forEach(card => {
         let bgImg = '';
         if (card.classList.contains('h-mixed-two-third-card')) {
-          bgImg = isDesktop ? './assets/images/bg-card-launch-desktop.png?v=neon3' : './assets/images/bg-card-launch-mobile.png?v=neon3';
+          bgImg = isDesktop ? './assets/images/bg-card-launch-desktop.webp?v=neon3' : './assets/images/bg-card-launch-mobile.webp?v=neon3';
         } else if (card.classList.contains('h-mixed-large-card')) {
-          bgImg = isDesktop ? './assets/images/bg-card-deliver-desktop.png?v=neon3' : './assets/images/bg-card-deliver-mobile.png?v=neon3';
+          bgImg = isDesktop ? './assets/images/bg-card-deliver-desktop.webp?v=neon3' : './assets/images/bg-card-deliver-mobile.webp?v=neon3';
         } else if (card.classList.contains('h-mixed-one-third-card')) {
           bgImg = isDesktop ? './assets/images/bg-card-neon-desktop.png?v=neon3' : './assets/images/bg-card-neon-mobile.png?v=neon3';
         }
