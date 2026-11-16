@@ -29,50 +29,77 @@
   background: #0c0d0e; color: #e3ff04; font-weight: 700; font-size: 22px;
 }
 
-/* ---------- Lead form section ---------- */
-.dg-lead { display: grid; gap: 32px; align-items: start; }
-@media (min-width: 1025px) { .dg-lead { grid-template-columns: 1fr 1.05fr; gap: 56px; } }
-.dg-lead__points { list-style: none; margin: 0 0 28px; padding: 0; display: grid; gap: 14px; }
-.dg-lead__points li { display: flex; gap: 10px; align-items: center; font-size: 18px; color: #f4f4ef; }
-.dg-lead__points svg { color: #e3ff04; flex: none; width: 18px; height: 18px; }
-.dg-lead__contacts { display: grid; gap: 12px; }
-.dg-lead__contact { display: flex; gap: 14px; align-items: center; text-decoration: none; color: #f4f4ef; padding: 14px 16px; border: 1px solid rgba(255, 255, 255, .12); border-radius: 16px; background: #0c0d0e; transition: border-color .15s ease; }
-.dg-lead__contact:hover { border-color: #e3ff04; color: #f4f4ef; }
-.dg-lead__contact b { display: block; font-size: 17px; }
-.dg-lead__contact small { display: block; color: #a1a1aa; font-size: 14px; }
-.dg-lead__contact-ic { width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; background: rgba(227, 255, 4, .12); color: #e3ff04; flex: none; }
-.dg-lead__contact-ic--wa { background: rgba(37, 211, 102, .14); color: #25d366; }
+/* ---------- Lead form section (uses the template's tokens: DM Sans 16/24, 14/20, 12px radius, #101011 cards) ---------- */
+.dg-lead {
+  display: grid; gap: 40px; align-items: start;
+  width: 100%; max-width: 1080px; margin: 0 auto;
+}
+@media (min-width: 1025px) { .dg-lead { grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: 64px; } }
 
-.dg-lead__form { position: relative; background: #ffffff; color: #111113; border-radius: 24px; padding: 28px 22px 22px; box-shadow: 0 20px 60px rgba(0, 0, 0, .45); }
-@media (min-width: 768px) { .dg-lead__form { padding: 36px 32px 28px; } }
-.dg-lead__badge { position: absolute; top: -14px; left: 24px; background: #e3ff04; color: #0c0d0e; font-size: 12px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; padding: 6px 12px; border-radius: 999px; }
-.dg-lead__form .field { display: grid; gap: 6px; margin-bottom: 14px; }
-.dg-lead__form label { font-size: 14px; font-weight: 700; color: #111113; }
-.dg-lead__form .opt { font-weight: 400; color: #6b6b66; }
-.dg-lead__form input, .dg-lead__form select, .dg-lead__form textarea {
-  width: 100%; min-height: 50px; padding: 12px 14px; border: 1.5px solid #e2e2da; border-radius: 12px;
-  background: #fafaf7; color: #111113; font: inherit; font-size: 16px;
+.dg-lead__info-title { color: #f8f9fa; margin: 0 0 24px; }
+.dg-lead__points { display: flex; flex-direction: column; gap: 12px; }
+.dg-lead__points .header__feature-list-item { color: #f8f9fa; }
+.dg-lead__contacts-label { color: rgba(255, 255, 255, .75); margin: 32px 0 12px; }
+.dg-lead__contacts { display: flex; flex-direction: column; gap: 12px; }
+.dg-lead__contact {
+  display: flex; align-items: center; gap: 16px; padding: 16px;
+  background: #141518; border: 1px solid rgba(255, 255, 255, .1); border-radius: 12px;
+  color: #f8f9fa; text-decoration: none; transition: border-color .15s ease;
 }
-.dg-lead__form textarea { min-height: 84px; resize: vertical; }
-.dg-lead__form input:focus, .dg-lead__form select:focus, .dg-lead__form textarea:focus { outline: none; border-color: #111113; box-shadow: 0 0 0 3px rgba(227, 255, 4, .6); }
-.dg-lead__form .field--row { display: grid; gap: 0 14px; grid-template-columns: 1fr; }
-@media (min-width: 520px) { .dg-lead__form .field--row { grid-template-columns: 1fr 1fr; } }
+.dg-lead__contact:hover { border-color: rgba(227, 255, 4, .5); color: #f8f9fa; }
+.dg-lead__contact-ic { width: 40px; height: 40px; border-radius: 10px; display: grid; place-items: center; background: rgba(227, 255, 4, .12); color: #e3ff04; flex: none; }
+.dg-lead__contact-ic--wa { background: rgba(37, 211, 102, .14); color: #25d366; }
+.dg-lead__contact-text { display: flex; flex-direction: column; min-width: 0; }
+.dg-lead__contact-text .h-t-body-2 { color: rgba(255, 255, 255, .75); }
+
+.dg-lead__form {
+  background: #101011; border: 1px solid rgba(255, 255, 255, .1); border-radius: 24px;
+  padding: 24px; color: #f8f9fa;
+}
+@media (min-width: 768px) { .dg-lead__form { padding: 32px; } }
+.dg-lead__form-head { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 24px; }
+.dg-lead__form-head h3 { margin: 0; color: #f8f9fa; }
+.dg-lead__form .field { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; min-width: 0; }
+.dg-lead__form label { display: block; margin: 0; color: rgba(255, 255, 255, .75); }
+.dg-lead__form .opt { color: #9d9ea4; margin-left: 2px; }
+.dg-lead__form input,
+.dg-lead__form select,
+.dg-lead__form textarea {
+  width: 100%; height: 48px; margin: 0; padding: 12px 16px;
+  background: #18181a; border: 1px solid rgba(255, 255, 255, .12); border-radius: 12px;
+  color: #f8f9fa; font-family: inherit; font-size: 16px; line-height: 24px; font-weight: 400;
+  outline: none; box-shadow: none; -webkit-appearance: none; appearance: none;
+  transition: border-color .15s ease, box-shadow .15s ease;
+}
+.dg-lead__form textarea { height: auto; min-height: 96px; resize: vertical; }
+.dg-lead__form select {
+  padding-right: 44px; cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M4 6l4 4 4-4' stroke='%23f8f9fa' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 16px center; background-size: 16px;
+}
+.dg-lead__form select option { color: #111113; background: #ffffff; }
+.dg-lead__form ::placeholder { color: #9d9ea4; opacity: 1; }
+.dg-lead__form input:hover, .dg-lead__form select:hover, .dg-lead__form textarea:hover { border-color: rgba(255, 255, 255, .24); }
+.dg-lead__form input:focus, .dg-lead__form select:focus, .dg-lead__form textarea:focus { border-color: #e3ff04; box-shadow: 0 0 0 3px rgba(227, 255, 4, .15); }
 .dg-lead__form .phone-wrap { display: flex; }
-.dg-lead__form .phone-wrap span { display: inline-flex; align-items: center; padding: 0 12px; border: 1.5px solid #e2e2da; border-right: 0; border-radius: 12px 0 0 12px; background: #efefe8; font-weight: 700; }
-.dg-lead__form .phone-wrap input { border-radius: 0 12px 12px 0; }
-.dg-lead__form .field__error { display: none; color: #d93025; font-size: 13px; }
-.dg-lead__form .field.is-invalid input, .dg-lead__form .field.is-invalid select { border-color: #d93025; }
-.dg-lead__form .field.is-invalid .field__error { display: block; }
-.dg-lead__submit {
-  width: 100%; min-height: 56px; border: 0; border-radius: 999px; cursor: pointer;
-  background: #e3ff04; color: #0c0d0e; font: inherit; font-size: 17px; font-weight: 700; margin-top: 4px;
-  transition: transform .15s ease, box-shadow .15s ease;
+.dg-lead__form .phone-wrap span {
+  display: inline-flex; align-items: center; padding: 0 14px;
+  background: #222225; border: 1px solid rgba(255, 255, 255, .12); border-right: 0; border-radius: 12px 0 0 12px;
+  color: #f8f9fa; font-size: 16px;
 }
-.dg-lead__submit:hover { transform: translateY(-1px); box-shadow: 0 10px 30px rgba(227, 255, 4, .35); }
-.dg-lead__submit[aria-busy="true"] { opacity: .7; pointer-events: none; }
-.dg-lead__form .form-note { margin: 12px 0 0; text-align: center; font-size: 13px; color: #6b6b66; }
-.dg-lead__form .form-status { display: none; margin: 12px 0 0; padding: 12px 14px; border-radius: 10px; font-size: 14px; }
-.dg-lead__form .form-status.is-error { display: block; background: #fdecea; color: #8a1c13; }
+.dg-lead__form .phone-wrap input { border-radius: 0 12px 12px 0; }
+.dg-lead__form .field--row { display: grid; grid-template-columns: 1fr; column-gap: 16px; }
+@media (min-width: 520px) { .dg-lead__form .field--row { grid-template-columns: 1fr 1fr; } }
+.dg-lead__form .field__error { display: none; color: #ff8a80; }
+.dg-lead__form .field.is-invalid input, .dg-lead__form .field.is-invalid select { border-color: #ff6b6b; }
+.dg-lead__form .field.is-invalid .field__error { display: block; }
+.dg-lead__form .dg-lead__submit { width: 100% !important; min-width: 0 !important; margin-top: 8px; }
+.dg-lead__form .dg-lead__submit[aria-busy="true"] { opacity: .7; pointer-events: none; }
+.dg-lead__form .form-note { display: flex; align-items: center; justify-content: center; gap: 8px; margin: 16px 0 0; color: #9d9ea4; text-align: center; }
+.dg-lead__form .form-note svg { flex: none; }
+.dg-lead__form .form-status { display: none; margin: 12px 0 0; padding: 12px 16px; border-radius: 12px; }
+.dg-lead__form .form-status.is-error { display: block; background: rgba(255, 107, 107, .12); color: #ffb4ab; }
+.dg-lead__form .form-status a { color: #e3ff04; }
 .hp-field { position: absolute !important; left: -9999px; width: 1px; height: 1px; opacity: 0; }
 
 /* ---------- Floating WhatsApp ---------- */
@@ -102,4 +129,9 @@
 .h-horizons-templates-card__media img {
   object-fit: cover !important;
   object-position: top center !important;
+}
+
+/* Phones/tablets: show the form right after the heading (contact options follow) */
+@media (max-width: 1024px) {
+  .dg-lead__form { order: -1; }
 }

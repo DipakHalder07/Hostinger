@@ -139,7 +139,8 @@
 
       var btn = form.querySelector('button[type="submit"]');
       btn.setAttribute('aria-busy', 'true');
-      var btnHtml = btn.innerHTML; btn.textContent = 'Sending…';
+      var btnLabel = btn.querySelector('.h-button-v2__text') || btn;
+      var btnHtml = btnLabel.innerHTML; btnLabel.textContent = 'Sending…';
 
       function done() {
         track('generate_lead', { form_id: formId, business_type: type.value, need: need || '(none)', plan: plan || '(none)' });
@@ -148,7 +149,7 @@
         setTimeout(function () { window.location.href = CONFIG.thankYouUrl; }, 300);
       }
       function fail() {
-        btn.removeAttribute('aria-busy'); btn.innerHTML = btnHtml;
+        btn.removeAttribute('aria-busy'); btnLabel.innerHTML = btnHtml;
         status.className = 'form-status is-error';
         status.innerHTML = 'Sorry, something went wrong. Please <a href="' + waUrl('Hi, I am ' + lead.name + '. I need a website (' + lead.type + '). My number: ' + lead.phone) + '" target="_blank" rel="noopener"><strong>message us on WhatsApp</strong></a> or call +91 86175 13004.';
       }
